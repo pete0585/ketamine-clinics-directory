@@ -8,44 +8,44 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Find a Ketamine Clinic Near You | LactationConsultantDirectory.com',
-    template: '%s | LactationConsultantDirectory.com',
+    default: 'Find a Ketamine Clinic Near You | KetamineTherapyFinder.com',
+    template: '%s | KetamineTherapyFinder.com',
   },
   description:
-    'Find a board-certified ketamine clinic (clinic) near you. Search by city, state, insurance, or specialty. Real support for ketamine therapy families.',
+    'Find a board-certified ketamine clinic near you. Search by city, state, insurance, or specialty. Real support for ketamine therapy patients.',
   keywords: [
-    'clinic',
     'ketamine clinic',
     'ketamine therapy',
     'find ketamine clinic',
-    'clinic near me',
+    'ketamine clinic near me',
+    'ketamine treatment',
     'ketamine therapy help',
   ],
-  authors: [{ name: 'LactationConsultantDirectory.com' }],
-  creator: 'LactationConsultantDirectory.com',
+  authors: [{ name: 'KetamineTherapyFinder.com' }],
+  creator: 'KetamineTherapyFinder.com',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://lactationconsultantdirectory.com',
-    siteName: 'LactationConsultantDirectory.com',
-    title: 'Find a Ketamine Clinic Near You | LactationConsultantDirectory.com',
+    url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ketaminetherapyfinder.com',
+    siteName: 'KetamineTherapyFinder.com',
+    title: 'Find a Ketamine Clinic Near You | KetamineTherapyFinder.com',
     description:
       'Find a board-certified ketamine clinic near you. Search by city, insurance, and specialty. Free to search, free to list.',
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://lactationconsultantdirectory.com'}/og-image.png`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ketaminetherapyfinder.com'}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: 'LactationConsultantDirectory.com — Find Breastfeeding Support Near You',
+        alt: 'KetamineTherapyFinder.com — Find Ketamine Therapy Near You',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Find a Ketamine Clinic Near You | LactationConsultantDirectory.com',
+    title: 'Find a Ketamine Clinic Near You | KetamineTherapyFinder.com',
     description: 'Find a board-certified ketamine clinic near you.',
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://lactationconsultantdirectory.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ketaminetherapyfinder.com'),
 }
 
 export default function RootLayout({

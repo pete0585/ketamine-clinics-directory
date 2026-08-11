@@ -3,9 +3,9 @@ import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
   const host = request.headers.get('host') || ''
-  if (host.includes('ketaminetherapyfinder.com')) {
+  if (host.includes('findketaminedoctor.com')) {
     const url = request.nextUrl.clone()
-    url.host = 'lactationconsultantdirectory.com'
+    url.host = 'ketaminetherapyfinder.com'
     url.protocol = 'https:'
     return NextResponse.redirect(url, 301)
   }

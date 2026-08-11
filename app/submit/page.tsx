@@ -4,9 +4,9 @@ import { CheckCircle, Star, ShieldCheck } from 'lucide-react'
 import SubmitForm from '@/components/SubmitForm'
 
 export const metadata: Metadata = {
-  title: 'List Your Lactation Consultant Practice',
+  title: 'List Your Ketamine Clinic',
   description:
-    'Add your practice to LactationConsultantDirectory.com. Free listing available. Pro ($79/year) and Verified ($129/year) listings get full profiles, contact forms, and priority placement.',
+    'Add your clinic to KetamineTherapyFinder.com. Free listing available. Pro and Verified listings get full profiles, contact forms, and priority placement.',
 }
 
 const PRICING_TIERS = [
@@ -66,7 +66,7 @@ export default function SubmitPage() {
       {/* Hero */}
       <div className="text-center mb-12">
         <h1 className="font-serif text-4xl font-bold text-charcoal-800">
-          List Your Practice on LactationConsultantDirectory.com
+          List Your Clinic on KetamineTherapyFinder.com
         </h1>
         <p className="mt-4 text-lg text-charcoal-500 max-w-2xl mx-auto">
           The only nationwide directory built for private-practice ketamine clinics. Free to list.

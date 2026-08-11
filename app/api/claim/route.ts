@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to create claim' }, { status: 500 })
     }
 
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://lactationconsultantdirectory.com'
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ketaminetherapyfinder.com'
     const claimUrl = `${siteUrl}/api/claim/verify?token=${token}`
 
     if (process.env.RESEND_API_KEY) {
@@ -52,13 +52,13 @@ export async function POST(request: NextRequest) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: process.env.RESEND_FROM_EMAIL ?? 'Lactation Consultant Directory <hello@mail.lactationconsultantdirectory.com>',
+          from: process.env.RESEND_FROM_EMAIL ?? 'Ketamine Therapy Finder <hello@mail.ketaminetherapyfinder.com>',
           to: email,
-          subject: `Claim your listing on LactationConsultantDirectory.com: ${listing.full_name}`,
+          subject: `Claim your listing on KetamineTherapyFinder.com: ${listing.name}`,
           html: `
             <p>Hi there,</p>
-            <p>Click the link below to verify and claim your listing on LactationConsultantDirectory.com:</p>
-            <p><a href="${claimUrl}" style="color:#C9883C;font-weight:bold;">Claim my listing</a></p>
+            <p>Click the link below to verify and claim your listing on KetamineTherapyFinder.com:</p>
+            <p><a href="${claimUrl}" style="color:#1D4ED8;font-weight:bold;">Claim my listing</a></p>
             <p>This link expires in 30 days.</p>
             <p>If you didn't request this, you can safely ignore this email.</p>
           `,

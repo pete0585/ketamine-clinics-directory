@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { US_STATES } from '@/types'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://lactationconsultantdirectory.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ketaminetherapyfinder.com'
 
 export const revalidate = 3600 // regenerate every hour
 

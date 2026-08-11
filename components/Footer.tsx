@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Heart } from 'lucide-react'
+import { Zap } from 'lucide-react'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -10,16 +10,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-5">
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-sage-300/20">
-                <Heart className="h-4 w-4 text-sage-300 fill-sage-300" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500/20">
+                <Zap className="h-4 w-4 text-blue-400" />
               </div>
               <span className="font-serif text-lg font-bold text-white">
-                Lactation Consultant<span className="text-sage-300">Directory</span>
+                Ketamine Therapy<span className="text-blue-400">Finder</span>
               </span>
             </Link>
             <p className="text-sm text-charcoal-200 max-w-sm leading-relaxed">
-              The nationwide directory of International Board Certified Lactation Consultants.
-              Connecting families with qualified lactation professionals since 2024.
+              The nationwide directory of verified ketamine therapy clinics.
+              Connecting patients with qualified providers since 2024.
             </p>
           </div>
 
@@ -52,10 +52,10 @@ export default function Footer() {
 
         <div className="mt-10 border-t border-charcoal-600 pt-8">
           <p className="text-xs text-charcoal-400 max-w-3xl leading-relaxed mb-4">
-            Lactation Consultant Directory is an independent directory and is not affiliated with, endorsed by, or sponsored by IBLCE or the clinic Commission. clinic and International Board Certified Lactation Consultant are certification marks of the International Board of Lactation Consultant Examiners, used here only to identify professionals who hold that credential.
+            Ketamine Therapy Finder is an independent directory and is not affiliated with, endorsed by, or sponsored by any medical board or certification body. Always verify provider credentials and consult with a licensed medical professional before beginning any treatment.
           </p>
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-            <p className="text-xs text-charcoal-300">© {currentYear} LactationConsultantDirectory.com. All rights reserved.</p>
+            <p className="text-xs text-charcoal-300">© {currentYear} KetamineTherapyFinder.com. All rights reserved.</p>
           </div>
         </div>
       </div>
