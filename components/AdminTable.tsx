@@ -61,7 +61,7 @@ export default function AdminTable({ listings: initial, type }: AdminTableProps)
               <td className="px-4 py-3">
                 <div>
                   <p className="font-medium text-charcoal-700">{listing.full_name}</p>
-                  <p className="text-xs text-charcoal-400">{listing.credentials.join(', ')}</p>
+                  <p className="text-xs text-charcoal-400">{(listing.credentials ?? []).join(', ')}</p>
                 </div>
               </td>
               <td className="px-4 py-3 hidden md:table-cell text-charcoal-500">
@@ -72,7 +72,7 @@ export default function AdminTable({ listings: initial, type }: AdminTableProps)
                   listing.plan_tier === 'verified' ? 'badge-verified' :
                   listing.plan_tier === 'pro' ? 'badge-pro' : 'badge-free'
                 }>
-                  {planTierLabel(listing.plan_tier)}
+                  {planTierLabel(listing.plan_tier ?? 'free')}
                 </span>
               </td>
               <td className="px-4 py-3 hidden lg:table-cell">
@@ -87,7 +87,7 @@ export default function AdminTable({ listings: initial, type }: AdminTableProps)
                   listing.status === 'active' ? 'text-green-600' :
                   listing.status === 'pending' ? 'text-amber-600' : 'text-red-500'
                 }`}>
-                  {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
+                  {(listing.status ?? 'pending').charAt(0).toUpperCase() + (listing.status ?? 'pending').slice(1)}
                 </span>
               </td>
               <td className="px-4 py-3">

@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { getListings } from '@/lib/data'
+import { getListingsByCity } from '@/lib/data'
 import ListingCard from '@/components/ListingCard'
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 export default async function BestKetamineClinicsPage() {
-  const listings = await getListings({ city: 'Houston', state: 'TX', limit: 10 })
+  const listings = await getListingsByCity('Houston', 'TX', 10)
 
   return (
     <main className="max-w-5xl mx-auto px-4 py-12">

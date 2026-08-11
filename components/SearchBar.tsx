@@ -9,6 +9,7 @@ interface SearchBarProps {
   defaultQuery?: string
   size?: 'default' | 'large'
   className?: string
+  states?: { abbr: string; name: string }[]
 }
 
 interface ZipResult {

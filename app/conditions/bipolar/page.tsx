@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { getListings } from '@/lib/data'
+import { getListingsByCondition } from '@/lib/data'
 import ListingCard from '@/components/ListingCard'
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 export default async function ConditionPage() {
-  const listings = await getListings({ condition: 'bipolar', limit: 6 })
+  const listings = await getListingsByCondition('bipolar', 6)
 
   return (
     <main className="max-w-5xl mx-auto px-4 py-12">

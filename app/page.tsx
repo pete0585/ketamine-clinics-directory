@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
-import { getListings, getStates } from '@/lib/data'
+import { getFeaturedListings, getStates } from '@/lib/data'
 import ListingCard from '@/components/ListingCard'
 import SearchBar from '@/components/SearchBar'
 import NewsletterFooterBar from '@/components/NewsletterFooterBar'
@@ -30,7 +30,7 @@ const CONDITIONS = [
 
 export default async function HomePage() {
   const [listings, states] = await Promise.all([
-    getListings({ limit: 6 }),
+    getFeaturedListings(6),
     getStates(),
   ])
 
@@ -98,11 +98,11 @@ export default async function HomePage() {
           <div className="flex flex-wrap justify-center gap-3">
             {states.slice(0, 20).map((state) => (
               <Link
-                key={state}
-                href={`/find/${state.toLowerCase().replace(/\s+/g, '-')}`}
+                key={state.abbr}
+                href={`/find/${state.abbr.toLowerCase()}`}
                 className="bg-white border border-gray-200 hover:border-teal-400 hover:text-teal-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
               >
-                {state}
+                {state.abbr}
               </Link>
             ))}
           </div>

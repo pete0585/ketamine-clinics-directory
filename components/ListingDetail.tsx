@@ -24,7 +24,7 @@ export default function ListingDetail({ listing }: ListingDetailProps) {
         <Link href="/listings" className="hover:text-charcoal-700">Find a Ketamine Clinic</Link>
         <span>/</span>
         <Link
-          href={`/find/${listing.state.toLowerCase()}/${listing.city.toLowerCase().replace(/\s+/g, '-')}-${listing.state.toLowerCase()}`}
+          href={`/find/${(listing.state ?? '').toLowerCase()}/${(listing.city ?? '').toLowerCase().replace(/\s+/g, '-')}-${(listing.state ?? '').toLowerCase()}`}
           className="hover:text-charcoal-700"
         >
           {listing.city}, {listing.state}
@@ -62,7 +62,7 @@ export default function ListingDetail({ listing }: ListingDetailProps) {
                   {listing.full_name}
                 </h1>
                 <p className="mt-1 text-sm font-medium text-charcoal-400">
-                  {listing.credentials.join(', ')}
+                  {(listing.credentials ?? []).join(', ')}
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -90,7 +90,7 @@ export default function ListingDetail({ listing }: ListingDetailProps) {
             <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-charcoal-500">
               <span className="flex items-center gap-1.5">
                 <MapPin className="h-4 w-4 text-rose-400" />
-                {listing.city}, {stateAbbreviationToName(listing.state)}
+                {listing.city}, {stateAbbreviationToName(listing.state ?? '')}
                 {listing.zip && ` ${listing.zip}`}
               </span>
               {listing.phone && (
@@ -125,22 +125,22 @@ export default function ListingDetail({ listing }: ListingDetailProps) {
               Telehealth available
             </span>
           )}
-          {listing.visit_types.includes('home') && (
+          {(listing.visit_types ?? []).includes('home') && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-ivory-100 border border-ivory-300 px-3 py-1.5 text-sm text-charcoal-600">
               <Home className="h-4 w-4" />
               Home visits
             </span>
           )}
-          {listing.visit_types.includes('office') && (
+          {(listing.visit_types ?? []).includes('office') && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-ivory-100 border border-ivory-300 px-3 py-1.5 text-sm text-charcoal-600">
               <Building2 className="h-4 w-4" />
               In-office
             </span>
           )}
-          {listing.languages.length > 0 && (
+          {(listing.languages_spoken ?? []).length > 0 && (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-ivory-100 border border-ivory-300 px-3 py-1.5 text-sm text-charcoal-600">
               <Languages className="h-4 w-4" />
-              {listing.languages.join(', ')}
+              {(listing.languages_spoken ?? []).join(', ')}
             </span>
           )}
         </div>
@@ -157,11 +157,11 @@ export default function ListingDetail({ listing }: ListingDetailProps) {
 
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
           {/* Specialties */}
-          {listing.specialties.length > 0 && (
+          {(listing.specialties ?? []).length > 0 && (
             <div>
               <h2 className="font-serif text-lg font-semibold text-charcoal-700 mb-3">Specialties</h2>
               <div className="flex flex-wrap gap-2">
-                {listing.specialties.map((s) => (
+                {(listing.specialties ?? []).map((s) => (
                   <span key={s} className="rounded-full bg-rose-50 border border-rose-100 px-3 py-1 text-sm text-rose-600">
                     {s}
                   </span>
@@ -171,11 +171,11 @@ export default function ListingDetail({ listing }: ListingDetailProps) {
           )}
 
           {/* Insurance */}
-          {listing.insurance_accepted.length > 0 && (
+          {(listing.insurance_accepted ?? []).length > 0 && (
             <div>
               <h2 className="font-serif text-lg font-semibold text-charcoal-700 mb-3">Insurance Accepted</h2>
               <ul className="space-y-1.5">
-                {listing.insurance_accepted.map((ins) => (
+                {(listing.insurance_accepted ?? []).map((ins) => (
                   <li key={ins} className="flex items-center gap-2 text-sm text-charcoal-600">
                     <CheckCircle className="h-4 w-4 text-sage-400 shrink-0" />
                     {ins}

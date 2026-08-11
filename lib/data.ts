@@ -1,5 +1,6 @@
 import { createClient } from './supabase/server'
 import type { Listing, City } from '@/types'
+import { US_STATES } from '@/types'
 
 export async function getListingBySlug(slug: string): Promise<Listing | null> {
   const supabase = await createClient()
@@ -155,6 +156,27 @@ export async function getTotalListingCount(): Promise<number> {
     .select('*', { count: 'exact', head: true })
     .eq('status', 'active')
   return count ?? 0
+}
+
+export async function getListingsByCondition(condition: string, limit = 6): Promise<Listing[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('ketamine_clinics_listings')
+    .select('*')
+    .eq('status', 'active')
+    .contains('conditions_treated', [condition])
+    .order('plan_tier_rank', { ascending: true })
+    .limit(limit)
+  return data ?? []
+}
+
+export async function getStates(): Promise<{ abbr: string; name: string }[]> {
+  const { data } = await (await createClient())
+    .from('ketamine_clinics_listings')
+    .select('state')
+    .eq('status', 'active')
+  const active = new Set((data ?? []).map((r: { state: string }) => r.state.toUpperCase()))
+  return US_STATES.filter((s) => active.has(s.abbr)).map((s) => ({ abbr: s.abbr, name: s.name }))
 }
 
 export async function getActiveStates(): Promise<string[]> {

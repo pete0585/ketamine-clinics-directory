@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `${listing.full_name}, clinic in ${listing.city}, ${listing.state}`
   const description = listing.bio
     ? `${listing.bio.slice(0, 155).trim()}…`
-    : `Find ${listing.full_name}, clinic in ${listing.city}, ${stateAbbreviationToName(listing.state)}. ${listing.telehealth ? 'Telehealth available. ' : ''}${listing.accepting_new_clients ? 'Accepting new clients.' : ''}`
+    : `Find ${listing.full_name}, clinic in ${listing.city}, ${stateAbbreviationToName(listing.state ?? '')}. ${listing.telehealth ? 'Telehealth available. ' : ''}${listing.accepting_new_clients ? 'Accepting new clients.' : ''}`
 
   return {
     title,
@@ -81,7 +81,7 @@ export default async function ListingPage({ params }: Props) {
           '@type': 'ListItem',
           position: 3,
           name: `${listing.city}, ${listing.state}`,
-          item: `${process.env.NEXT_PUBLIC_SITE_URL}/find/${listing.state.toLowerCase()}/${listing.city.toLowerCase().replace(/\s+/g, '-')}-${listing.state.toLowerCase()}`,
+          item: `${process.env.NEXT_PUBLIC_SITE_URL}/find/${(listing.state ?? '').toLowerCase()}/${(listing.city ?? '').toLowerCase().replace(/\s+/g, '-')}-${(listing.state ?? '').toLowerCase()}`,
         },
         {
           '@type': 'ListItem',
