@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    return NextResponse.json({ success: true, listingName: listing.full_name })
+    return NextResponse.json({ success: true, listingName: listing.name })
   } catch (err) {
     console.error('Claim error:', err)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
