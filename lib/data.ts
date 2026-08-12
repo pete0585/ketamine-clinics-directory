@@ -2,15 +2,29 @@ import { createClient } from './supabase/server'
 import type { Listing, City } from '@/types'
 import { US_STATES } from '@/types'
 
+// Normalize a raw DB row so both field-name variants work in components
+function normalize(row: Record<string, unknown>): Listing {
+  const r = row as Listing & Record<string, unknown>
+  // Map DB column names to component aliases
+  r.plan_tier = r.plan_tier ?? (r as Record<string, unknown>).listing_tier as string | undefined
+  r.plan_tier_rank = r.plan_tier_rank ?? (r as Record<string, unknown>).listing_tier_rank as number | undefined
+  r.photo_url = r.photo_url ?? (r as Record<string, unknown>).headshot_url as string | undefined
+  r.telehealth = r.telehealth ?? (r as Record<string, unknown>).accepts_telehealth as boolean | undefined
+  r.accepting_new_clients = r.accepting_new_clients ?? (r as Record<string, unknown>).accepting_new_patients as boolean | undefined
+  r.lat = r.lat ?? (r as Record<string, unknown>).latitude as number | undefined
+  r.lng = r.lng ?? (r as Record<string, unknown>).longitude as number | undefined
+  return r
+}
+
 export async function getListingBySlug(slug: string): Promise<Listing | null> {
   const supabase = await createClient()
   const { data } = await supabase
     .from('ketamine_clinics_listings')
     .select('*')
     .eq('slug', slug)
-    .eq('status', 'active')
+    .eq('is_active', true)
     .single()
-  return data
+  return data ? normalize(data as Record<string, unknown>) : null
 }
 
 export async function getListings({
@@ -42,8 +56,8 @@ export async function getListings({
   let query = supabase
     .from('ketamine_clinics_listings')
     .select('*', { count: 'exact' })
-    .eq('status', 'active')
-    .order('plan_tier_rank', { ascending: true })
+    .eq('is_active', true)
+    .order('listing_tier_rank', { ascending: true })
     .order('full_name', { ascending: true })
 
   if (state) query = query.ilike('state', state)
@@ -51,17 +65,17 @@ export async function getListings({
   if (condition) query = query.contains('conditions_treated', [condition])
   if (insurance) query = query.contains('insurance_accepted', [insurance])
   if (visitType) query = query.contains('visit_types', [visitType])
-  if (telehealth === true) query = query.eq('telehealth', true)
-  if (acceptingNew === true) query = query.eq('accepting_new_clients', true)
+  if (telehealth === true) query = query.eq('accepts_telehealth', true)
+  if (acceptingNew === true) query = query.eq('accepting_new_patients', true)
   if (search) query = query.textSearch('search_vector', search, { type: 'websearch' })
-  if (tier) query = query.eq('plan_tier', tier)
+  if (tier) query = query.eq('listing_tier', tier)
 
   const from = (page - 1) * pageSize
   const to = from + pageSize - 1
   query = query.range(from, to)
 
   const { data, count } = await query
-  return { listings: data ?? [], total: count ?? 0 }
+  return { listings: (data ?? []).map((r) => normalize(r as Record<string, unknown>)), total: count ?? 0 }
 }
 
 export async function getListingsNear({
@@ -84,7 +98,7 @@ export async function getListingsNear({
     radius_miles: radius,
   })
   if (error || !data) return { listings: [], total: 0 }
-  const all = data as Listing[]
+  const all = (data as Record<string, unknown>[]).map(normalize)
   const from = (page - 1) * pageSize
   return { listings: all.slice(from, from + pageSize), total: all.length }
 }
@@ -94,11 +108,11 @@ export async function getFeaturedListings(limit = 6): Promise<Listing[]> {
   const { data } = await supabase
     .from('ketamine_clinics_listings')
     .select('*')
-    .eq('status', 'active')
-    .in('plan_tier', ['verified', 'pro'])
-    .order('plan_tier_rank', { ascending: true })
+    .eq('is_active', true)
+    .in('listing_tier', ['verified', 'pro', 'featured', 'premium'])
+    .order('listing_tier_rank', { ascending: true })
     .limit(limit)
-  return data ?? []
+  return (data ?? []).map((r) => normalize(r as Record<string, unknown>))
 }
 
 export async function getCityPage(citySlug: string): Promise<City | null> {
@@ -131,10 +145,10 @@ export async function getListingsByCity(city: string, state: string, limit = 20)
     .select('*')
     .ilike('city', city)
     .ilike('state', state)
-    .eq('status', 'active')
-    .order('plan_tier_rank', { ascending: true })
+    .eq('is_active', true)
+    .order('listing_tier_rank', { ascending: true })
     .limit(limit)
-  return data ?? []
+  return (data ?? []).map((r) => normalize(r as Record<string, unknown>))
 }
 
 export async function getActiveCities(limit = 150): Promise<City[]> {
@@ -154,7 +168,7 @@ export async function getTotalListingCount(): Promise<number> {
   const { count } = await supabase
     .from('ketamine_clinics_listings')
     .select('*', { count: 'exact', head: true })
-    .eq('status', 'active')
+    .eq('is_active', true)
   return count ?? 0
 }
 
@@ -163,18 +177,18 @@ export async function getListingsByCondition(condition: string, limit = 6): Prom
   const { data } = await supabase
     .from('ketamine_clinics_listings')
     .select('*')
-    .eq('status', 'active')
+    .eq('is_active', true)
     .contains('conditions_treated', [condition])
-    .order('plan_tier_rank', { ascending: true })
+    .order('listing_tier_rank', { ascending: true })
     .limit(limit)
-  return data ?? []
+  return (data ?? []).map((r) => normalize(r as Record<string, unknown>))
 }
 
 export async function getStates(): Promise<{ abbr: string; name: string }[]> {
   const { data } = await (await createClient())
     .from('ketamine_clinics_listings')
     .select('state')
-    .eq('status', 'active')
+    .eq('is_active', true)
   const active = new Set((data ?? []).map((r: { state: string }) => r.state.toUpperCase()))
   return US_STATES.filter((s) => active.has(s.abbr)).map((s) => ({ abbr: s.abbr, name: s.name }))
 }
@@ -184,8 +198,7 @@ export async function getActiveStates(): Promise<string[]> {
   const { data } = await supabase
     .from('ketamine_clinics_listings')
     .select('state')
-    .eq('status', 'active')
+    .eq('is_active', true)
   const states = Array.from(new Set((data ?? []).map((r: { state: string }) => r.state))).sort()
   return states
 }
-
