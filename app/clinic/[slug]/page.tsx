@@ -4,6 +4,9 @@ import { getListingBySlug } from '@/lib/data'
 import ListingDetail from '@/components/ListingDetail'
 import { stateAbbreviationToName } from '@/lib/utils'
 
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+
 interface Props {
   params: Promise<{ slug: string }>
 }
@@ -19,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `${listing.full_name}, clinic in ${listing.city}, ${listing.state}`
   const description = listing.bio
     ? `${listing.bio.slice(0, 155).trim()}…`
-    : `Find ${listing.full_name}, clinic in ${listing.city}, ${stateAbbreviationToName(listing.state ?? '')}. ${listing.telehealth ? 'Telehealth available. ' : ''}${listing.accepting_new_clients ? 'Accepting new clients.' : ''}`
+    : `Find ${listing.full_name}, clinic in ${listing.city}, ${stateAbbreviationToName(listing.state ?? '')}. ${listing.accepts_telehealth || listing.telehealth ? 'Telehealth available. ' : ''}${listing.accepting_new_patients || listing.accepting_new_clients ? 'Accepting new clients.' : ''}`
 
   return {
     title,
@@ -28,8 +31,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       type: 'profile',
-      images: listing.photo_url
-        ? [{ url: listing.photo_url, alt: listing.full_name }]
+      images: (listing.photo_url || listing.headshot_url)
+        ? [{ url: (listing.photo_url || listing.headshot_url)!, alt: listing.full_name }]
         : undefined,
     },
   }
@@ -48,7 +51,7 @@ export default async function ListingPage({ params }: Props) {
     '@type': ['LocalBusiness', 'MedicalBusiness'],
     name: listing.full_name,
     description: listing.bio ?? undefined,
-    image: listing.photo_url ?? undefined,
+    image: (listing.photo_url || listing.headshot_url) ?? undefined,
     telephone: listing.phone ?? undefined,
     url: listing.website ?? undefined,
     address: {
@@ -58,20 +61,15 @@ export default async function ListingPage({ params }: Props) {
       postalCode: listing.zip ?? undefined,
       addressCountry: 'US',
     },
-    ...(listing.lat && listing.lng
+    ...(((listing.lat || listing.latitude) && (listing.lng || listing.longitude))
       ? {
           geo: {
             '@type': 'GeoCoordinates',
-            latitude: listing.lat,
-            longitude: listing.lng,
+            latitude: listing.lat ?? listing.latitude,
+            longitude: listing.lng ?? listing.longitude,
           },
         }
       : {}),
-    hasCredential: {
-      '@type': 'EducationalOccupationalCredential',
-      credentialCategory: 'clinic',
-      name: 'International Board Certified Ketamine Clinic',
-    },
     breadcrumb: {
       '@type': 'BreadcrumbList',
       itemListElement: [
