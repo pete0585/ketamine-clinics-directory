@@ -7,7 +7,7 @@ import NewsletterFooterBar from '@/components/NewsletterFooterBar'
 
 export const metadata: Metadata = {
   title: 'Find a Ketamine Therapy Clinic Near You | KetamineTherapyFinder.com',
-  description: 'Search ketamine therapy clinics across the US. Find providers treating depression, PTSD, anxiety, chronic pain, and more. Filter by condition, location, and telehealth availability.',
+  description: 'Search ketamine therapy clinics across the US. Find providers treating depression, PTSD, anxiety, and chronic pain. Filter by condition and location.',
   openGraph: {
     title: 'Find a Ketamine Therapy Clinic Near You | KetamineTherapyFinder.com',
     description: 'Search ketamine therapy clinics across the US treating depression, PTSD, anxiety, chronic pain, and more.',
