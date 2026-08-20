@@ -21,7 +21,7 @@ export default function ListingCard({ listing, featured = false }: ListingCardPr
 
   return (
     <Link
-      href={`/clinic/${listing.slug}`}
+      href={`/listings/${listing.slug}`}
       className={`card block p-5 group ${featured ? 'border-2 border-sage-200' : ''}`}
     >
       <div className="flex gap-4">
