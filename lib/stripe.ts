@@ -5,8 +5,8 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 })
 
 export const PLAN_PRICE_IDS = {
-  pro: process.env.STRIPE_PRO_PRICE_ID!,
-  verified: process.env.STRIPE_VERIFIED_PRICE_ID!,
+  pro: process.env.STRIPE_VERIFIED_PRICE_ID!,
+  verified: process.env.STRIPE_FEATURED_PRICE_ID!,
 }
 
 export async function createCheckoutSession({
