@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
+import { cityPageCanonical } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Best Ketamine Clinic in San Francisco, CA | Ketamine Clinic Directory",
   description: "Find ketamine clinic in San Francisco, California. 18+ listed. Filter by city and compare providers.",
+  alternates: { canonical: cityPageCanonical("ketamine-clinics-san-francisco-ca") },
 }
 
 async function getListings() {

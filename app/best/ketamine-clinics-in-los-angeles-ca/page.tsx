@@ -2,10 +2,12 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { getListingsByCity } from '@/lib/data'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Best Ketamine Clinics in Los Angeles, CA | Ketamine Therapy Finder',
   description: 'Find the best ketamine therapy clinics in Los Angeles, CA. Compare providers, read profiles, and book consultations.',
+  alternates: { canonical: cityPageCanonical('ketamine-clinics-in-los-angeles-ca') },
 }
 
 export default async function BestKetamineClinicsPage() {

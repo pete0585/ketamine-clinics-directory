@@ -2,10 +2,12 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { getListingsByCity } from '@/lib/data'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Best Ketamine Clinics in San Francisco, CA | Ketamine Therapy Finder',
   description: 'Find the best ketamine therapy clinics in San Francisco, CA. Compare providers offering IV ketamine, Spravato, and esketamine for depression, PTSD, anxiety, and chronic pain.',
+  alternates: { canonical: cityPageCanonical('ketamine-clinics-in-san-francisco-ca') },
 }
 
 export default async function BestKetamineClinicsSFPage() {

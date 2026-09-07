@@ -2,10 +2,12 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { getListingsByCity } from '@/lib/data'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Best Ketamine Clinics in San Diego, CA | Ketamine Therapy Finder',
   description: 'Find the best ketamine therapy clinics in San Diego, CA. Compare providers for depression, PTSD, anxiety, and chronic pain. San Diego has a strong veteran-focused ketamine market.',
+  alternates: { canonical: cityPageCanonical('ketamine-clinics-in-san-diego-ca') },
 }
 
 export default async function BestKetamineClinicsSanDiegoPage() {
