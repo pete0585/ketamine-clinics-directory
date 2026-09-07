@@ -2,10 +2,12 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { getListingsByCity } from '@/lib/data'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Best Ketamine Clinics in Tampa, FL | Ketamine Therapy Finder',
   description: 'Find the best ketamine therapy clinics in Tampa, FL. Compare providers for depression, PTSD, anxiety, and chronic pain across the Tampa Bay area.',
+  alternates: { canonical: cityPageCanonical('ketamine-clinics-in-tampa-fl') },
 }
 
 export default async function BestKetamineClinicsTampaPage() {

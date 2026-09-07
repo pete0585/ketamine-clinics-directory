@@ -2,10 +2,12 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { getListingsByCity } from '@/lib/data'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Best Ketamine Clinics in Austin, TX | Ketamine Therapy Finder',
   description: 'Find the best ketamine therapy clinics in Austin, TX. Compare providers for depression, PTSD, anxiety, and chronic pain. IV ketamine and Spravato options available.',
+  alternates: { canonical: cityPageCanonical('ketamine-clinics-in-austin-tx') },
 }
 
 export default async function BestKetamineClinicsAustinPage() {

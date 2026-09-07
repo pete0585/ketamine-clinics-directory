@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
+import { cityPageCanonical } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "Best Ketamine Clinic in Arlington, TX | Ketamine Clinic Directory",
   description: "Find ketamine clinic in Arlington, Texas. 15+ listed. Filter by city and compare providers.",
+  alternates: { canonical: cityPageCanonical("ketamine-clinics-arlington-tx") },
 }
 
 async function getListings() {

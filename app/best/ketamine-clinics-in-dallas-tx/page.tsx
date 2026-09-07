@@ -2,10 +2,12 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { getListingsByCity } from '@/lib/data'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Best Ketamine Clinics in Dallas, TX | Ketamine Therapy Finder',
   description: 'Find the best ketamine therapy clinics in Dallas, TX. Compare providers for depression, PTSD, anxiety, and chronic pain. The Dallas-Fort Worth metro has 20+ ketamine providers.',
+  alternates: { canonical: cityPageCanonical('ketamine-clinics-in-dallas-tx') },
 }
 
 export default async function BestKetamineClinicsDallasPage() {

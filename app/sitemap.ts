@@ -1,8 +1,8 @@
 import type { MetadataRoute } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { US_STATES } from '@/types'
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ketaminetherapyfinder.com'
+import { getBestCityPageFolders } from '@/lib/best-city-pages'
+import { BASE, cityPageCanonical } from '@/lib/site'
 
 export const revalidate = 3600 // regenerate every hour
 
@@ -28,25 +28,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: siteUrl,
+      url: BASE,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,
     },
     {
-      url: `${siteUrl}/listings`,
+      url: `${BASE}/listings`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.9,
     },
     {
-      url: `${siteUrl}/submit`,
+      url: `${BASE}/submit`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${siteUrl}/resources/what-is-an-clinic`,
+      url: `${BASE}/resources/what-is-an-clinic`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
@@ -54,25 +54,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   const statePages: MetadataRoute.Sitemap = US_STATES.map((s) => ({
-    url: `${siteUrl}/find/${s.abbr.toLowerCase()}`,
+    url: `${BASE}/find/${s.abbr.toLowerCase()}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }))
 
   const cityPages: MetadataRoute.Sitemap = cities.map((city) => ({
-    url: `${siteUrl}/find/${city.state.toLowerCase()}/${city.slug}`,
+    url: `${BASE}/find/${city.state.toLowerCase()}/${city.slug}`,
     lastModified: city.updated_at ? new Date(city.updated_at) : new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.7,
   }))
 
+  const bestCityPages: MetadataRoute.Sitemap = getBestCityPageFolders().map((folder) => ({
+    url: cityPageCanonical(folder),
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }))
+
   const listingPages: MetadataRoute.Sitemap = listings.map((listing) => ({
-    url: `${siteUrl}/listings/${listing.slug}`,
+    url: `${BASE}/listings/${listing.slug}`,
     lastModified: listing.updated_at ? new Date(listing.updated_at) : new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.6,
   }))
 
-  return [...staticPages, ...statePages, ...cityPages, ...listingPages]
+  return [...staticPages, ...statePages, ...cityPages, ...bestCityPages, ...listingPages]
 }

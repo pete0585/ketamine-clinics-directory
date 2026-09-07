@@ -2,10 +2,12 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { getListingsByCity } from '@/lib/data'
 import ListingCard from '@/components/ListingCard'
+import { cityPageCanonical } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Best Ketamine Clinics in Denver, CO | Ketamine Therapy Finder',
   description: 'Find the best ketamine therapy clinics in Denver, CO. Compare providers for depression, PTSD, anxiety, OCD, and chronic pain. Denver has one of the strongest ketamine markets in the Mountain West.',
+  alternates: { canonical: cityPageCanonical('ketamine-clinics-in-denver-co') },
 }
 
 export default async function BestKetamineClinicsDenverPage() {
