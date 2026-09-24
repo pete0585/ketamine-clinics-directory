@@ -43,44 +43,6 @@ export default function ClaimPage() {
     }
   }
 
-  async function upgradeToProOrVerified(tier: 'pro' | 'verified') {
-    setLoading(true)
-    try {
-      const res = await fetch('/api/upgrade', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ listingId: params.id, tier }),
-      })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error ?? 'Failed to create checkout session')
-      if (data.url) {
-        window.location.href = data.url
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to start checkout. Please try again.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  async function savePhone(e: React.FormEvent) {
-    e.preventDefault()
-    if (!phone) return
-    setLoading(true)
-    try {
-      await fetch('/api/claim/phone', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ listingId: params.id, phone }),
-      })
-      setPhoneSaved(true)
-    } catch {
-      setPhoneSaved(true)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   if (step === 'verifying') {
     return (
       <div className="mx-auto max-w-lg px-4 py-20 text-center">
