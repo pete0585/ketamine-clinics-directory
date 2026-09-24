@@ -17,7 +17,7 @@ export default function ClaimPage() {
 
   useEffect(() => {
     if (searchParams.get('verified') === 'true') {
-      setStep('upgrade')
+      setStep('verified')
     }
   }, [searchParams])
 
