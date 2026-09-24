@@ -40,10 +40,21 @@ export default async function HomePage() {
       <section className="bg-gradient-to-br from-teal-700 to-teal-900 text-white py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Find a Ketamine Therapy Clinic Near You
+            Find trusted ketamine therapy clinics near you
           </h1>
           <p className="text-xl text-teal-100 mb-8">
-            Connect with licensed ketamine therapy providers treating depression, PTSD, anxiety, chronic pain, and more.
+            Browse verified ketamine therapy clinics by condition treated and location — and connect directly. Free, always.
+          </p>
+          <p className="text-sm text-gray-500 mt-4">
+            Are you a ketamine clinic?{' '}
+            <a
+              href="https://studiozerohq.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:opacity-80"
+            >
+              List your practice free →
+            </a>
           </p>
           <SearchBar states={states} />
         </div>
