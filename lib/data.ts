@@ -68,7 +68,6 @@ export async function getListings({
   if (telehealth === true) query = query.eq('accepts_telehealth', true)
   if (acceptingNew === true) query = query.eq('accepting_new_patients', true)
   if (search) query = query.textSearch('search_vector', search, { type: 'websearch' })
-  if (tier) query = query.eq('listing_tier', tier)
 
   const from = (page - 1) * pageSize
   const to = from + pageSize - 1
@@ -109,7 +108,6 @@ export async function getFeaturedListings(limit = 6): Promise<Listing[]> {
     .from('ketamine_clinics_listings')
     .select('*')
     .eq('is_active', true)
-    .in('listing_tier', ['verified', 'pro', 'featured', 'premium'])
     .order('listing_tier_rank', { ascending: true })
     .limit(limit)
   return (data ?? []).map((r) => normalize(r as Record<string, unknown>))
