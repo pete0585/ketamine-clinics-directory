@@ -14,6 +14,8 @@ export default function ClaimPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [listingName, setListingName] = useState<string>('')
+  const [phone, setPhone] = useState('')
+  const [phoneSaved, setPhoneSaved] = useState(false)
 
   useEffect(() => {
     if (searchParams.get('verified') === 'true') {
@@ -38,6 +40,24 @@ export default function ClaimPage() {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong')
       setStep('error')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function savePhone(e: React.FormEvent) {
+    e.preventDefault()
+    if (!phone) return
+    setLoading(true)
+    try {
+      await fetch('/api/claim/phone', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ listingId: params.id, phone }),
+      })
+      setPhoneSaved(true)
+    } catch {
+      setPhoneSaved(true)
     } finally {
       setLoading(false)
     }
