@@ -4,6 +4,7 @@ import { getFeaturedListings, getStates } from '@/lib/data'
 import ListingCard from '@/components/ListingCard'
 import SearchBar from '@/components/SearchBar'
 import NewsletterFooterBar from '@/components/NewsletterFooterBar'
+import NewsletterSignup from '@/components/NewsletterSignup'
 
 export const metadata: Metadata = {
   title: 'Find a Ketamine Therapy Clinic Near You | KetamineTherapyFinder.com',
@@ -173,6 +174,13 @@ export default async function HomePage() {
       </section>
 
       <NewsletterFooterBar />
-    </main>
+    
+      {/* Newsletter signup */}
+      <section className="py-12 bg-brand-dark border-t border-white/10">
+        <div className="container mx-auto px-4 max-w-xl">
+          <NewsletterSignup />
+        </div>
+      </section>
+</main>
   )
 }
