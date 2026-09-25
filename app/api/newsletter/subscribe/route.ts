@@ -7,7 +7,7 @@ const NICHE = 'ketamine' as const
 const DIRECTORY_SLUG = 'ketamine-clinics-directory' as const
 const NEWSLETTER_NAME = 'Ketamine Context Letter' as const
 const CONFIRM_URL_BASE = 'https://ketaminetherapyfinder.com/newsletter/confirm'
-const DASHBOARD_URL = 'https://aidam.thestrategicveteran.com'
+const DASHBOARD_URL = 'https://aidam.studiozerohq.com'
 
 export async function POST(req: NextRequest) {
   let email: string, first_name: string | undefined
