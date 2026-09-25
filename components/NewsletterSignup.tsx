@@ -53,7 +53,7 @@ export default function NewsletterSignup({ compact = false }: Props) {
   if (compact) {
     return (
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
-        <span className="text-xs font-semibold text-gray-300 whitespace-nowrap">Ketamine Context Letter</span>
+        <span className="text-xs font-semibold text-gray-300 whitespace-nowrap">The Ketamine Courier</span>
         <input
           type="email"
           value={email}
@@ -76,7 +76,7 @@ export default function NewsletterSignup({ compact = false }: Props) {
 
   return (
     <div className="bg-gray-50 border border-gray-200 rounded-2xl px-6 py-8 max-w-xl mx-auto text-center">
-      <h2 className="text-xl font-bold text-gray-900 mb-1">Ketamine Context Letter</h2>
+      <h2 className="text-xl font-bold text-gray-900 mb-1">The Ketamine Courier</h2>
       <p className="text-sm text-gray-500 mb-6">Weekly ketamine therapy insights, delivered Thursday</p>
       <form onSubmit={handleSubmit} className="space-y-3">
         <div className="flex flex-col sm:flex-row gap-2">
