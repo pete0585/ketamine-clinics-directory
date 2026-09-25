@@ -16,7 +16,7 @@ export default function Navigation() {
               <Heart className="h-4 w-4 text-sage fill-sage" />
             </div>
             <span className="font-serif text-lg font-bold text-charcoal-700">
-              Lactation Consultant<span className="text-sage">Directory</span>
+              Ketamine Therapy<span className="text-sage">Finder</span>
             </span>
           </Link>
 
@@ -25,7 +25,7 @@ export default function Navigation() {
               Find a Ketamine Clinic
             </Link>
             <Link href="/resources/what-is-an-clinic" className="text-sm font-medium text-charcoal-400 hover:text-charcoal-700 transition-colors">
-              What is a Lactation Consultant?
+              What is Ketamine Therapy?
             </Link>
             <Link href="/submit" className="text-sm font-medium text-charcoal-400 hover:text-charcoal-700 transition-colors">
               List Your Practice
@@ -58,7 +58,7 @@ export default function Navigation() {
               className="block px-4 py-2.5 text-sm font-medium text-charcoal-600 hover:bg-ivory-100 rounded-lg"
               onClick={() => setMobileOpen(false)}
             >
-              What is a Lactation Consultant?
+              What is Ketamine Therapy?
             </Link>
             <Link
               href="/submit"
