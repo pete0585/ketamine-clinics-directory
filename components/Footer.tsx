@@ -25,12 +25,12 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">For Families</h3>
+            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">For Patients</h3>
             <ul className="space-y-2.5">
               <li><Link href="/listings" className="text-sm text-charcoal-200 hover:text-white transition-colors">Find a Ketamine Clinic</Link></li>
-              <li><Link href="/resources/what-is-an-clinic" className="text-sm text-charcoal-200 hover:text-white transition-colors">What is a Lactation Consultant?</Link></li>
-              <li><Link href="/listings?visitType=virtual" className="text-sm text-charcoal-200 hover:text-white transition-colors">Telehealth Consultants</Link></li>
-              <li><Link href="/listings?visitType=home" className="text-sm text-charcoal-200 hover:text-white transition-colors">Home Visit Consultants</Link></li>
+              <li><Link href="/resources/what-is-an-clinic" className="text-sm text-charcoal-200 hover:text-white transition-colors">What is Ketamine Therapy?</Link></li>
+              <li><Link href="/listings?visitType=virtual" className="text-sm text-charcoal-200 hover:text-white transition-colors">Telehealth Clinics</Link></li>
+              <li><Link href="/listings?visitType=home" className="text-sm text-charcoal-200 hover:text-white transition-colors">In-Home Treatment</Link></li>
             </ul>
           </div>
 
