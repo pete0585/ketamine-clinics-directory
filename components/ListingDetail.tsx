@@ -64,7 +64,7 @@ export default function ListingDetail({ listing }: ListingDetailProps) {
                   <Phone className="h-4 w-4 text-sage-400"/>
                   {formatPhone(listing.phone)}
                 </a>)}
-              {listing.website && (<a href={listing.website.startsWith('http') ? listing.website : `https://${listing.website}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-sage-500 transition-colors">
+              {listing.website && (<a data-directory-action="website_click" href={listing.website.startsWith('http') ? listing.website : `https://${listing.website}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-sage-500 transition-colors">
                   <Globe className="h-4 w-4 text-sage-400"/>
                   Website
                 </a>)}
