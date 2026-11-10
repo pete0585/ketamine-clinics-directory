@@ -44,7 +44,7 @@ export default async function HomePage() {
             Find trusted ketamine therapy clinics near you
           </h1>
           <p className="text-xl text-teal-100 mb-8">
-            Browse verified ketamine therapy clinics by condition treated and location — and connect directly. Free, always.
+            Browse ketamine therapy clinics by condition treated and location — and connect directly. Free, always.
           </p>
           <p className="text-sm text-gray-500 mt-4">
             Are you a ketamine clinic?{' '}

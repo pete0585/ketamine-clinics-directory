@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { CheckCircle, Loader2 } from 'lucide-react';
-import { SPECIALTIES, INSURANCE_OPTIONS, US_STATES, VISIT_TYPES } from '@/types';
+import { SPECIALTIES, INSURANCE_OPTIONS, US_STATES } from '@/types';
 const schema = z.object({
     name: z.string().min(2, 'Full name is required'),
     credentials: z.string().min(1, 'Credentials are required'),
@@ -16,7 +16,6 @@ const schema = z.object({
     email: z.string().email('Enter a valid email'),
     telehealth: z.boolean().default(false),
     accepting_new_clients: z.boolean().default(true),
-    visit_types: z.array(z.string()).optional(),
     insurance_accepted: z.array(z.string()).optional(),
     specialties: z.array(z.string()).optional(),
     bio: z.string().max(2000, 'Bio must be 2000 characters or less').optional(),
@@ -32,7 +31,6 @@ export default function SubmitForm() {
         defaultValues: {
             telehealth: false,
             accepting_new_clients: true,
-            visit_types: [],
             insurance_accepted: [],
             specialties: [],
         },
@@ -46,8 +44,8 @@ export default function SubmitForm() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
             });
-            if (!res.ok) {
-                const body = await res.json();
+            const body = await res.json();
+            if (!res.ok || body.success !== true || body.status !== 'pending_review') {
                 throw new Error(body.error ?? 'Submission failed');
             }
             setSubmitted(true);
@@ -64,14 +62,12 @@ export default function SubmitForm() {
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-sage-100 mb-4">
           <CheckCircle className="h-8 w-8 text-sage-500"/>
         </div>
-        <h2 className="font-serif text-2xl font-bold text-charcoal-700">You're listed!</h2>
+        <h2 className="font-serif text-2xl font-bold text-charcoal-700">Submission saved for review</h2>
         <p className="mt-3 text-charcoal-500 max-w-sm">
-          Your listing has been submitted and is under review. You'll receive an email once it's live.
-          Look out for a claim link so you can add your full profile.
+          Your submission is pending review and is not public yet. No email delivery or approval time is promised.
         </p>
       </div>);
     }
-    const visitTypesValue = watch('visit_types') ?? [];
     const insuranceValue = watch('insurance_accepted') ?? [];
     const specialtiesValue = watch('specialties') ?? [];
     return (<form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
@@ -92,7 +88,7 @@ export default function SubmitForm() {
           </div>
 
           <div>
-            <label className="label">Email Address * <span className="font-normal text-charcoal-300">(not shown publicly)</span></label>
+            <label className="label">Email Address *</label>
             <input {...register('email')} type="email" className="input" placeholder="sarah@example.com"/>
             {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
           </div>
@@ -149,24 +145,6 @@ export default function SubmitForm() {
               <input type="checkbox" {...register('accepting_new_clients')} className="h-4 w-4 rounded border-ivory-300 text-sage focus:ring-sage-200"/>
               <span className="text-sm font-medium text-charcoal-700">Accepting new clients</span>
             </label>
-          </div>
-
-          <div>
-            <label className="label">Visit Types</label>
-            <div className="flex flex-wrap gap-4">
-              {VISIT_TYPES.map((vt) => (<label key={vt.value} className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked={visitTypesValue.includes(vt.value)} onChange={(e) => {
-                const current = visitTypesValue;
-                if (e.target.checked) {
-                    setValue('visit_types', [...current, vt.value]);
-                }
-                else {
-                    setValue('visit_types', current.filter((v) => v !== vt.value));
-                }
-            }} className="h-4 w-4 rounded border-ivory-300 text-sage focus:ring-sage-200"/>
-                  <span className="text-sm text-charcoal-600">{vt.label}</span>
-                </label>))}
-            </div>
           </div>
 
           <div>

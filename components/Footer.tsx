@@ -19,8 +19,8 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-charcoal-200 max-w-sm leading-relaxed">
-              The nationwide directory of verified ketamine therapy clinics.
-              Connecting patients with qualified providers since 2024.
+              A nationwide directory of ketamine therapy clinics.
+              Compare clinic information and contact providers directly.
             </p>
           </div>
 

@@ -47,7 +47,7 @@ export default function FindingAKetamineClinic() {
         </ul>
         <div className="mt-8 p-6 bg-teal-50 rounded-xl">
           <p className="font-semibold text-teal-800">Ready to find a clinic?</p>
-          <Link href="/listings" className="text-teal-600 hover:text-teal-800 underline">Browse verified ketamine clinics near you →</Link>
+          <Link href="/listings" className="text-teal-600 hover:text-teal-800 underline">Browse ketamine clinics near you →</Link>
         </div>
       </div>
     </main>
