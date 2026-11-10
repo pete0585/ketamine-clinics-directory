@@ -88,7 +88,7 @@ export default function SubmitForm() {
           </div>
 
           <div>
-            <label className="label">Email Address * <span className="font-normal text-charcoal-300">(not shown publicly)</span></label>
+            <label className="label">Email Address *</label>
             <input {...register('email')} type="email" className="input" placeholder="sarah@example.com"/>
             {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>}
           </div>
